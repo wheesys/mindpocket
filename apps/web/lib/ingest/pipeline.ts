@@ -1,5 +1,4 @@
 import type { IngestResult, IngestStatus } from "@repo/types"
-import { put } from "@vercel/blob"
 import { eq } from "drizzle-orm"
 import { nanoid } from "nanoid"
 import { db } from "@/db/client"
@@ -9,6 +8,7 @@ import { bookmark } from "@/db/schema/bookmark"
 import { embedding as embeddingTable } from "@/db/schema/embedding"
 import { generateEmbeddings } from "@/lib/ai/embedding"
 import { getEmbeddingModel } from "@/lib/ai/provider"
+import { getStorageProvider } from "@/lib/storage"
 import {
   convertBuffer,
   convertUrl,
@@ -169,15 +169,17 @@ export async function ingestFromFile(params: IngestFileParams): Promise<IngestRe
     ingestStatus: "pending" as IngestStatus,
   })
 
-  // 先读取 file 到 buffer 并上传 blob（需要在请求生命周期内完成）
+  // 先读取 file 到 buffer 并上传（需要在请求生命周期内完成）
   const fileBuffer = await file.arrayBuffer()
-  const blobResult = await put(`ingest/${bookmarkId}/${fileName}`, fileBuffer, {
+  const storage = getStorageProvider()
+  const storageKey = `ingest/${bookmarkId}/${fileName}`
+  const uploadResult = await storage.put(storageKey, fileBuffer, {
     access: "public",
   })
 
   await db
     .update(bookmark)
-    .set({ fileUrl: blobResult.url, url: blobResult.url })
+    .set({ fileUrl: uploadResult.url, url: uploadResult.url })
     .where(eq(bookmark.id, bookmarkId))
 
   // 触发后台处理，不 await

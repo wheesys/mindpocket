@@ -39,3 +39,7 @@ PROJECT.md
 apps/web/tsconfig.tsbuildinfo
 .superset/
 .playwright-mcp
+
+# docker 挂载目录
+data/
+logs/
