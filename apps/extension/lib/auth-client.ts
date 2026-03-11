@@ -88,3 +88,9 @@ export function saveBookmark(payload: { url: string; html: string; title?: strin
     body: JSON.stringify({ ...payload, clientSource: "extension" }),
   })
 }
+
+// 检查 URL 是否已收录
+export function checkBookmarkExists(url: string) {
+  // 使用 search 参数查询
+  return authFetch(`/api/bookmarks/search?query=${encodeURIComponent(url)}`)
+}

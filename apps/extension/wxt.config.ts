@@ -10,7 +10,7 @@ export default defineConfig({
   manifest: {
     name: "MindPocket",
     description: "Save web pages to MindPocket",
-    permissions: ["activeTab", "storage", "notifications"],
+    permissions: ["activeTab", "storage", "notifications", "bookmarks", "alarms"],
     host_permissions: ["<all_urls>"],
   },
 })

@@ -158,3 +158,106 @@
   font-size: 13px;
   color: #666;
 }
+
+/* 设置页面 */
+.settings-page {
+  max-height: 500px;
+  overflow-y: auto;
+}
+
+.settings-section {
+  border-top: 1px solid #e5e7eb;
+  padding-top: 12px;
+  margin-top: 12px;
+}
+
+.settings-section-title {
+  font-size: 14px;
+  font-weight: 600;
+  color: #333;
+  margin-bottom: 8px;
+}
+
+.settings-hint {
+  font-size: 12px;
+  color: #999;
+  margin-bottom: 8px;
+}
+
+.settings-checkbox {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 13px;
+  color: #333;
+  cursor: pointer;
+  padding: 4px 0;
+}
+
+.settings-checkbox input[type="checkbox"] {
+  cursor: pointer;
+}
+
+.settings-indent {
+  margin-left: 20px;
+  margin-top: 8px;
+}
+
+.btn-secondary {
+  background: #6366f1;
+  color: #fff;
+}
+
+.btn-secondary:hover:not(:disabled) {
+  background: #4f46e5;
+}
+
+.result {
+  font-size: 13px;
+  margin-top: 8px;
+}
+
+.folder-list {
+  max-height: 150px;
+  overflow-y: auto;
+  border: 1px solid #e5e7eb;
+  border-radius: 6px;
+  padding: 4px;
+}
+
+.folder-item {
+  padding: 6px 8px;
+  border-radius: 4px;
+}
+
+.folder-item:hover {
+  background: #f9fafb;
+}
+
+.folder-name {
+  font-size: 13px;
+}
+
+.scan-history {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.history-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 6px 8px;
+  background: #f9fafb;
+  border-radius: 4px;
+  font-size: 12px;
+}
+
+.history-time {
+  color: #666;
+}
+
+.history-stats {
+  color: #333;
+}
